@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { useAuth } from "../../context/AuthContext";
+import { API_BASE } from "../../config";
 import { updateProfile, uploadResume } from "../../services/authService";
 
 function StudentProfile() {
@@ -135,7 +135,7 @@ function StudentProfile() {
           {user?.resumeUrl ? (
             <p style={{ fontSize: "0.85rem", marginBottom: "12px" }}>
               📄 Current:{" "}
-              <a href={`http://localhost:3001${user.resumeUrl}`} target="_blank" rel="noopener noreferrer">
+               <a href={`${API_BASE}${user.resumeUrl}`} target="_blank" rel="noopener noreferrer">
                 View Resume
               </a>
             </p>

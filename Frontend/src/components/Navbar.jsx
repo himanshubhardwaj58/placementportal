@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { API_BASE } from "../config";
 import { getNotifications, markAllAsRead } from "../services/notificationService";
 import "./Navbar.css";
 
@@ -76,7 +76,7 @@ function Navbar({ onToggleSidebar }) {
         <div className="navbar-user" ref={dropdownRef} onClick={() => setShowDropdown(!showDropdown)}>
           <div className="navbar-avatar">
             {user?.avatar ? (
-              <img src={`http://localhost:3001${user.avatar}`} alt={user.name} />
+               <img src={`${API_BASE}${user.avatar}`} alt={user.name} />
             ) : (
               getInitials(user?.name)
             )}

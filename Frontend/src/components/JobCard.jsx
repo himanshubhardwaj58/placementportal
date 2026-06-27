@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./JobCard.css";
+import { API_BASE } from "../config";
 
 function JobCard({ job, basePath = "/student" }) {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ function JobCard({ job, basePath = "/student" }) {
       <div className="job-card-header">
         <div className="job-card-logo">
           {companyLogo ? (
-            <img src={`http://localhost:3001${companyLogo}`} alt={companyName} />
+             <img src={`${API_BASE}${companyLogo}`} alt={companyName} />
           ) : (
             companyName[0]
           )}

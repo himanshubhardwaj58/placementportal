@@ -5,6 +5,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { useAuth } from "../../context/AuthContext";
 import { getJobById } from "../../services/jobService";
 import { applyToJob } from "../../services/applicationService";
+import { API_BASE } from "../../config";
 
 function JobDetail() {
   const { id } = useParams();
@@ -84,7 +85,7 @@ function JobDetail() {
             color: "var(--accent-primary-hover)", flexShrink: 0, overflow: "hidden"
           }}>
             {company?.logo ? (
-              <img src={`http://localhost:3001${company.logo}`} alt={company.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+               <img src={`${API_BASE}${company.logo}`} alt={company.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             ) : (company?.name?.[0] || "C")}
           </div>
           <div style={{ flex: 1 }}>

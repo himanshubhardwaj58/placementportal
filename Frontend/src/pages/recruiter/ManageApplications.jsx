@@ -95,7 +95,7 @@ function ManageApplications() {
                   <td>{app.student?.cgpa || "—"}</td>
                   <td>
                     {app.student?.resumeUrl ? (
-                      <a href={`http://localhost:3001${app.student.resumeUrl}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm">
+                       <a href={`${API_BASE}${app.student.resumeUrl}`} target="_blank" rel="noopener noreferrer" className="btn btn-ghost btn-sm">
                         View
                       </a>
                     ) : "—"}
