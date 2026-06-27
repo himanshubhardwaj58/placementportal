@@ -97,12 +97,10 @@ app.use((err, req, res, next) => {
 // ── Connect DB ──
 if (!MONGO_URI) {
   console.error("❌ FATAL ERROR: MONGO_URI is not defined in environment variables!");
-  // Don't process.exit(1) in Vercel, but we log it.
 } else {
   mongoose
     .connect(MONGO_URI, {
       serverSelectionTimeoutMS: 5000,
-      bufferCommands: false, // Disable buffering so it fails immediately if not connected
     })
     .then(() => console.log("✅ MongoDB Connected"))
     .catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
