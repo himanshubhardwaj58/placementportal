@@ -24,7 +24,7 @@ function JobDetail() {
     try {
       const res = await getJobById(id);
       setJob(res.data.job);
-    } catch (err) {
+    } catch {
       setMessage({ type: "error", text: "Job not found" });
     } finally {
       setLoading(false);

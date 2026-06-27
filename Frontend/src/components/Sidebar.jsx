@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Sidebar.css";
 
@@ -43,7 +43,6 @@ const navItems = {
 
 function Sidebar({ isOpen, onClose }) {
   const { user } = useAuth();
-  const location = useLocation();
   const sections = navItems[user?.role] || [];
 
   return (

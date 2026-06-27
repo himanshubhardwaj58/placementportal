@@ -4,12 +4,10 @@ import DashboardLayout from "../../components/DashboardLayout";
 import StatsCard from "../../components/StatsCard";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import EmptyState from "../../components/EmptyState";
-import { useAuth } from "../../context/AuthContext";
 import { getMyJobs } from "../../services/jobService";
 import { getMyCompany } from "../../services/companyService";
 
 function RecruiterDashboard() {
-  const { user } = useAuth();
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [company, setCompany] = useState(null);

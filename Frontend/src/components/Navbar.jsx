@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from "../config";
 import { useAuth } from "../context/AuthContext";
-import { getNotifications, markAllAsRead } from "../services/notificationService";
+import { getNotifications } from "../services/notificationService";
 import "./Navbar.css";
 
 function Navbar({ onToggleSidebar }) {
@@ -32,7 +32,7 @@ function Navbar({ onToggleSidebar }) {
     try {
       const res = await getNotifications({ limit: 1 });
       setUnreadCount(res.data.unreadCount || 0);
-    } catch (err) {
+    } catch {
       // silent fail
     }
   };

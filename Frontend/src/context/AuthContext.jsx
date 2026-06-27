@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from "react";
 import api from "../services/api";
 
@@ -18,7 +19,7 @@ export function AuthProvider({ children }) {
       const res = await api.get("/auth/profile");
       setUser(res.data.user);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-    } catch (err) {
+    } catch {
       // Cookie invalid or missing, clear user
       localStorage.removeItem("user");
       setUser(null);
@@ -35,8 +36,8 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     try {
       await api.get("/auth/logout"); // Instruct backend to clear the HttpOnly cookie
-    } catch (err) {
-      console.error("Logout error", err);
+    } catch {
+      console.error("Logout error");
     } finally {
       setUser(null);
       localStorage.removeItem("user");

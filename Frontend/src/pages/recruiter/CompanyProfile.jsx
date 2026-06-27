@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { useAuth } from "../../context/AuthContext";
 import { getMyCompany, createCompany, updateCompany } from "../../services/companyService";
 
 function CompanyProfile() {
-  const { user } = useAuth();
   const [company, setCompany] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);

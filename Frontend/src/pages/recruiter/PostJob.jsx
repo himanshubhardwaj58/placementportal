@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../components/DashboardLayout";
-import { useAuth } from "../../context/AuthContext";
 import { createJob } from "../../services/jobService";
 import { getMyCompany } from "../../services/companyService";
 
 function PostJob() {
-  const { user } = useAuth();
   const navigate = useNavigate();
   const [company, setCompany] = useState(null);
   const [loading, setLoading] = useState(true);

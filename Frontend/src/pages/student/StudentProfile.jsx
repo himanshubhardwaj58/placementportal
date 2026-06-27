@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
-import LoadingSpinner from "../../components/LoadingSpinner";
 import { API_BASE } from "../../config";
 import { useAuth } from "../../context/AuthContext";
 import { updateProfile, uploadResume } from "../../services/authService";
