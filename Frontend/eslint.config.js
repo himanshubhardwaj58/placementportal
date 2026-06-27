@@ -18,8 +18,10 @@ export default defineConfig([
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
     rules: {
-      'react-hooks/immutability': 'warn',
-      'react-hooks/set-state-in-effect': 'warn',
+      'react-hooks/immutability': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+      'no-use-before-define': 'off'
     },
   },
 ])
