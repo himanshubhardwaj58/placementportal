@@ -5,6 +5,7 @@ import ApplicationStatusBadge from "../../components/ApplicationStatusBadge";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import EmptyState from "../../components/EmptyState";
 import { getJobApplications, updateApplicationStatus } from "../../services/applicationService";
+import { API_BASE } from "../../config";
 import { getJobById } from "../../services/jobService";
 
 function ManageApplications() {
