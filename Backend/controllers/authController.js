@@ -39,8 +39,8 @@ const register = async (req, res) => {
 
     res.cookie("jwt", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      secure: true, // Required for sameSite: "none"
+      sameSite: "none", // Required for cross-domain cookies (Frontend on one domain, Backend on another)
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
@@ -86,8 +86,8 @@ const login = async (req, res) => {
 
     res.cookie("jwt", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      secure: true, // Required for sameSite: "none"
+      sameSite: "none", // Required for cross-domain cookies
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
@@ -193,6 +193,8 @@ const logout = async (req, res) => {
   res.cookie("jwt", "loggedout", {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
+    secure: true,
+    sameSite: "none",
   });
   res.status(200).json({ message: "Logged out successfully" });
 };
