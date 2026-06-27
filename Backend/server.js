@@ -32,7 +32,11 @@ app.use("/api", limiter);
 // Restrict CORS to frontend origin
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"], // Adjust in production
+    origin: process.env.FRONTEND_URL || [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://placementportal-frontend.vercel.app"
+    ], // Allow FRONTEND_URL, localhost, or deployed frontend
     credentials: true,
   })
 );
@@ -90,22 +94,20 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ── Connect DB & Start Server ──
-async function start() {
-  try {
-    console.log("⏳ Connecting to MongoDB...");
-    await mongoose.connect(MONGO_URI, {
-      serverSelectionTimeoutMS: 5000,
-    });
-    console.log("✅ MongoDB Connected");
+// ── Connect DB ──
+mongoose
+  .connect(MONGO_URI, {
+    serverSelectionTimeoutMS: 5000,
+  })
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
 
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
-    });
-  } catch (err) {
-    console.error("❌ MongoDB Connection Error:", err.message);
-    process.exit(1);
-  }
+// Start server only if not running on Vercel
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  });
 }
 
-start();
+// Export the app for Vercel serverless function
+module.exports = app;
