@@ -32,11 +32,13 @@ app.use("/api", limiter);
 // Restrict CORS to frontend origin
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || [
+    origin: [
+      process.env.FRONTEND_URL,
       "http://localhost:5173",
       "http://localhost:5174",
-      "https://placementportal-frontend.vercel.app"
-    ], // Allow FRONTEND_URL, localhost, or deployed frontend
+      "https://placementportal-frontend.vercel.app",
+      "https://airwenders.vercel.app"
+    ].filter(Boolean), // Allow FRONTEND_URL, localhost, or deployed frontends
     credentials: true,
   })
 );
