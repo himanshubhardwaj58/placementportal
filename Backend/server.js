@@ -61,6 +61,27 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 const PORT = process.env.PORT || 3001;
 const MONGO_URI = process.env.MONGO_URI;
 
+// ── Database Connection Middleware (For Serverless) ──
+app.use(async (req, res, next) => {
+  if (!MONGO_URI) {
+    console.error("❌ FATAL ERROR: MONGO_URI is not defined in environment variables!");
+    return res.status(500).json({ message: "Server Configuration Error: Missing MONGO_URI" });
+  }
+  
+  if (mongoose.connection.readyState !== 1 && mongoose.connection.readyState !== 2) {
+    try {
+      await mongoose.connect(MONGO_URI, {
+        serverSelectionTimeoutMS: 5000,
+      });
+      console.log("✅ MongoDB Connected (Serverless Middleware)");
+    } catch (err) {
+      console.error("❌ MongoDB Connection Error:", err.message);
+      return res.status(500).json({ message: "Database connection failed. Please check MongoDB IP Whitelist and MONGO_URI." });
+    }
+  }
+  next();
+});
+
 // ── Routes ──
 const authRoutes = require("./routes/authRoutes");
 const jobRoutes = require("./routes/jobRoutes");
@@ -94,20 +115,16 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ── Connect DB ──
-if (!MONGO_URI) {
-  console.error("❌ FATAL ERROR: MONGO_URI is not defined in environment variables!");
-} else {
-  mongoose
-    .connect(MONGO_URI, {
-      serverSelectionTimeoutMS: 5000,
-    })
-    .then(() => console.log("✅ MongoDB Connected"))
-    .catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
-}
-
 // Start server only if not running on Vercel
 if (!process.env.VERCEL) {
+  // Local DB connect
+  if (MONGO_URI) {
+    mongoose
+      .connect(MONGO_URI, { serverSelectionTimeoutMS: 5000 })
+      .then(() => console.log("✅ MongoDB Connected (Local)"))
+      .catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
+  }
+  
   app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
   });
