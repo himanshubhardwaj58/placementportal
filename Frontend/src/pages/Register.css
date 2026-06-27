@@ -1,0 +1,111 @@
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.register-page::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.16) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 9s ease-in-out infinite;
+}
+
+.register-page::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -8%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.13) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 11s ease-in-out infinite reverse;
+}
+
+.register-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  z-index: 1;
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.5s ease;
+}
+
+.register-brand {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.register-brand h1 {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.register-brand p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.role-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.role-option {
+  flex: 1;
+  padding: 12px;
+  background: var(--bg-input);
+  border: 2px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+}
+
+.role-option:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+.role-option.active {
+  border-color: var(--accent-primary);
+  background: var(--accent-primary-glow);
+  color: var(--accent-primary-hover);
+}
+
+.role-option-icon {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.role-option-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.register-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
